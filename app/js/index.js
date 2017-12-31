@@ -87,6 +87,7 @@ let vue = new Vue({
         options1: [],
         list: ['bitcoin', 'bitcoin-cash', 'cardano', 'dash', 'ethereum', 'golem-network-tokens', 'iota', 'litecoin', 'monero', 'nem', 'ripple', 'stellar', 'tron', 'zcash'],
         invest: 0,
+        investTotal: 0,
         investgot:0,
         gainTotal: 0,
         columns: [
@@ -157,13 +158,24 @@ let vue = new Vue({
 
     <!-- Chart -->
     <br>
-    <Row>
-        <Col span="22" offset="1">
+    <Row v-if="chartData.labels.length>0">
+        <Col span="17" offset="1">
             <mychart :chartData="chartData" :chartTitle="chartTitle"></mychart>
             <br>
-            <div style="text-align: right;" v-if="chartData.labels.length>0">
+            <div style="text-align: right;">
                 <Button type="primary" icon="android-download" @click.native="downloadChartData">CSV</Button>
             </div> 
+        </Col>
+        <Col span="4" offset="1">
+            <Card>
+                <p slot="title">
+                <Icon type="ios-pulse"></Icon>
+                    Total
+                </p>            
+                Invested : {{ investTotal }} {{ devise }} <br>
+                Value : {{ currentValue }} {{ devise }}<br>
+                Gain : <b :style="{ color: gainTotal>=0?'#006400':'#FF0000' }">{{ gainTotal.toFixed(2) }}</b> {{ devise }}
+            </Card>
         </Col>
     </Row>
     <br>
@@ -266,6 +278,9 @@ let vue = new Vue({
     computed: {
         chartTitle: function() {
             return 'Current gain : ' + this.gainTotal.toFixed(2) + ' ' + this.devise;
+            },
+        currentValue: function() {
+            return (this.investTotal + this.gainTotal).toFixed(2);
             }
         },
 
@@ -330,6 +345,7 @@ let vue = new Vue({
          */
         refreshTable: function() {
             this.gainTotal = 0;
+            this.investTotal = 0;
             this.requestsToDo = this.data.length;
             this.data.forEach(function(item) {
                 vue.loading = true;
@@ -378,6 +394,7 @@ let vue = new Vue({
                     let gain = parseFloat((amount - this.data[i].invested).toFixed(2));
                     this.data[i].gain = gain;
                     this.gainTotal += gain;
+                    this.investTotal += this.data[i].invested;
                     this.requestsToDo--;
                     if(this.requestsToDo===0) {
                         this.chartData.labels.push(DateTime.local().toFormat('yyyy-MM-dd TT'));
