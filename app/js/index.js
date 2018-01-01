@@ -385,7 +385,7 @@ let vue = new Vue({
                 if (this.data[i].currency == currency) {
                     let price = parseFloat(json.price_usd);
                     if(this.devise==='€') {price = parseFloat(json.price_eur);}
-                    this.data[i].price = parseFloat(price.toFixed(2));
+                    this.data[i].price = parseFloat(price.toFixed(4));
                     this.data[i].change1h = parseFloat(json.percent_change_1h);
                     this.data[i].change24h = parseFloat(json.percent_change_24h);
                     this.data[i].change7d = parseFloat(json.percent_change_7d);
