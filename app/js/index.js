@@ -173,7 +173,7 @@ let vue = new Vue({
                     Total
                 </p>            
                 Invested : {{ investTotal }} {{ devise }} <br>
-                Value : {{ currentValue }} {{ devise }}<br>
+                Value : <b>{{ currentValue }}<b> {{ devise }}<br>
                 Gain : <b :style="{ color: gainTotal>=0?'#006400':'#FF0000' }">{{ gainTotal.toFixed(2) }}</b> {{ devise }}
             </Card>
         </Col>
