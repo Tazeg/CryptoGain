@@ -85,7 +85,7 @@ let vue = new Vue({
         loading1: false,
         selectCurrency: '', // selected currency in modal
         options1: [],
-        list: ['bitcoin', 'bitcoin-cash', 'cardano', 'dash', 'ethereum', 'golem-network-tokens', 'iota', 'litecoin', 'monero', 'nem', 'ripple', 'stellar', 'tron', 'zcash'],
+        list: ['bitcoin', 'bitcoin-cash', 'cardano', 'dash', 'ethereum', 'golem-network-tokens', 'iota', 'litecoin', 'monero', 'nem', 'neo', 'ripple', 'stellar', 'tron', 'zcash'],
         invest: 0,
         investTotal: 0,
         investgot:0,
@@ -173,7 +173,7 @@ let vue = new Vue({
                     Total
                 </p>            
                 Invested : {{ investTotal }} {{ devise }} <br>
-                Value : {{ currentValue }} {{ devise }}<br>
+                Value : <b>{{ currentValue }}<b> {{ devise }}<br>
                 Gain : <b :style="{ color: gainTotal>=0?'#006400':'#FF0000' }">{{ gainTotal.toFixed(2) }}</b> {{ devise }}
             </Card>
         </Col>
