@@ -30,4 +30,4 @@ npm run start
 
 # Donate
 
-<https://en.jeffprod.com/donate.html>
+<https://en.jeffprod.com/donate/>
